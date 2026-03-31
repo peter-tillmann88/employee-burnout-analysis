@@ -13,7 +13,7 @@ def load_data():
     #drop uselsss featrues
     df = df.drop(columns=["employee_id"], errors="ignore")
 
-    
+    df = df.dropna(subset=["burn_rate"])
     return df
 
 
