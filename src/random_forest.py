@@ -20,8 +20,8 @@ def feature_importance(rf, preprocessor):
 
 def plot_results(y_test, y_pred):
     plt.scatter(y_test, y_pred, color='purple')
-    plt.xlabel('Actual Salary')
-    plt.ylabel('Predicted Salary')
+    plt.xlabel('Actual Burn Rate')
+    plt.ylabel('Predicted Burn Rate')
     plt.title("Random Forest: Actual vs Predicted")
     plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'k--', lw=2)
     plt.show()
