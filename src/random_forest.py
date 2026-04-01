@@ -2,7 +2,7 @@ from sklearn.ensemble import RandomForestRegressor
 from data_loading import load_data, split_data
 from data_cleaning import get_preprocessor
 import matplotlib.pyplot as plt
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, root_mean_squared_error
 import pandas as pd
 
 def random_forest(X_train, y_train, X_test, y_test):
@@ -26,12 +26,15 @@ def plot_results(y_test, y_pred):
     plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'k--', lw=2)
     plt.show()
 
-def metrics(y_test, y_pred):
+def metrics(y_test, y_pred, rf):
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
-    print("Out-of-Bag Score:", rf.oob_score_)
-    print("Mean Squared Error:", mse)
-    print("R-squared:", r2)
+    rmse = root_mean_squared_error(y_test, y_pred)
+    print("Random Forest Results:")
+    print("RMSE:", round(rmse, 4))
+    print("R2:", round(r2, 4))
+    print("MSE:", round(mse, 4))
+    print("OOB:", round(rf.oob_score_, 4))
 
 def main():
     df = load_data()
@@ -40,8 +43,9 @@ def main():
     X_train_processed = preprocessor.fit_transform(X_train)
     X_test_processed = preprocessor.transform(X_test)
     rf, y_test, y_pred = random_forest(X_train_processed, y_train, X_test_processed, y_test)
+    metrics(y_test, y_pred, rf)
     feature_importance(rf, preprocessor)
-    plot_results(y_test, y_pred)
+    #plot_results(y_test, y_pred)
 
 if __name__ == "__main__":
     main()
