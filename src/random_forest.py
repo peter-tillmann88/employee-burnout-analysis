@@ -2,7 +2,7 @@ from sklearn.ensemble import RandomForestRegressor
 from data_loading import load_data, split_data
 from data_cleaning import get_preprocessor
 import matplotlib.pyplot as plt
-from sklearn.metrics import mean_squared_error, r2_score, root_mean_squared_error
+from sklearn.metrics import mean_squared_error, r2_score, root_mean_squared_error,  mean_absolute_error
 import pandas as pd
 
 def random_forest(X_train, y_train, X_test, y_test):
@@ -30,11 +30,14 @@ def metrics(y_test, y_pred, rf):
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
     rmse = root_mean_squared_error(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
     print("Random Forest Results:")
     print("RMSE:", round(rmse, 4))
     print("R2:", round(r2, 4))
     print("MSE:", round(mse, 4))
     print("OOB:", round(rf.oob_score_, 4))
+    print("MAE:", round(mae, 4))
+
 
 def main():
     df = load_data()
