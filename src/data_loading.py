@@ -25,3 +25,8 @@ def split_data(df):
 
     return X_train, X_test, y_train, y_test
 
+if __name__ == "__main__":
+    df = load_data()
+    
+    print("Number of instances: ", df.shape[0])
+    print("Number of features :",df.shape[1])
