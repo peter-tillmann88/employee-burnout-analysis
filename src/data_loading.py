@@ -13,7 +13,17 @@ def load_data():
     #drop uselsss featrues
     df = df.drop(columns=["employee_id"], errors="ignore")
 
+    before = len(df)
+
     df = df.dropna(subset=["burn_rate"])
+
+    after = len(df)
+
+    print(f"Rows before cleaning: {before}")
+    print(f"Rows after cleaning:  {after}")
+    print(f"Rows removed: {before -after}" )
+
+
     return df
 
 
